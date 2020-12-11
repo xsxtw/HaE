@@ -4,6 +4,8 @@ HaE is used to highlight HTTP requests and extract information from `HTTP respon
 
 ## Public Rules
 
+Copy to `config.json`
+
 ```json
 {
 	"Chinese Mobile Number": {
@@ -47,7 +49,7 @@ HaE is used to highlight HTTP requests and extract information from `HTTP respon
 		"action": "any"
 	},
 	"Alibaba OSS": {
-		"loaded": false,
+		"loaded": true,
 		"regex": "([A|a]ccess[K|k]ey[I|i]d|[A|a]ccess[K|k]ey[S|s]ecret)",
 		"color": "green",
 		"engine": "dfa",
