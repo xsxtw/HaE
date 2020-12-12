@@ -50,7 +50,7 @@ Copy to `config.json`
 	},
 	"Alibaba OSS": {
 		"loaded": true,
-		"regex": "([A|a]ccess[K|k]ey[I|i]d|[A|a]ccess[K|k]ey[S|s]ecret)",
+		"regex": "([A|a]ccess[K|k]ey[I|i][D|d]|[A|a]ccess[K|k]ey[S|s]ecret)",
 		"color": "green",
 		"engine": "dfa",
 		"scope": "any",
