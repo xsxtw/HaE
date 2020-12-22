@@ -20,7 +20,7 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(AM8000)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -60,13 +60,13 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(ICG 1000系统管理)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
     "Fingerprint: Citrix-Metaframe": {
         "loaded": true,
-        "regex": "(window.location=\"/Citrix/MetaFrame)",
+        "regex": "(window.location=\\\"/Citrix/MetaFrame)",
         "color": "gray",
         "engine": "dfa",
         "scope": "response",
@@ -100,7 +100,7 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(CISCO ASR)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -113,10 +113,10 @@ Copy to `config.json`
         "action": "any"
     },
     "Fingerprint: H3C ER3200": {
-        "loaded": false,
+        "loaded": true,
         "regex": "(ER3200系统管理)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -140,7 +140,7 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(Spark Master at)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -156,7 +156,7 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(HUAWEI SRG2220)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -188,13 +188,13 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(Citrix Web PN Server)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
     "Fingerprint: juniper_vpn": {
         "loaded": true,
-        "regex": "(welcome.cgi?p=logo)",
+        "regex": "(welcome.cgi\\?p=logo)",
         "color": "gray",
         "engine": "dfa",
         "scope": "response",
@@ -236,7 +236,7 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(Nagios access)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -244,7 +244,7 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(ER8300系统管理)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -252,7 +252,7 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(Citrix Access Gateway)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -268,7 +268,7 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(TP-LINK Wireless WDR3600)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -284,7 +284,7 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(HUAWEI ASG2050)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -305,10 +305,10 @@ Copy to `config.json`
         "action": "any"
     },
     "Fingerprint: H3C ER2100V2": {
-        "loaded": false,
+        "loaded": true,
         "regex": "(ER2100V2系统管理)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -340,21 +340,13 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(ER3108GW系统管理)",
         "color": "gray",
-        "engine": "nfa",
-        "scope": "response",
-        "action": "any"
-    },
-    "Response Password": {
-        "loaded": true,
-        "regex": "(\"password\":)",
-        "color": "red",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
     "Fingerprint: o2security_vpn": {
         "loaded": true,
-        "regex": "(client_param=install_active)",
+        "regex": "(client_param\\=install_active)",
         "color": "gray",
         "engine": "dfa",
         "scope": "response",
@@ -372,7 +364,7 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(ER3260G2系统管理)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -380,7 +372,7 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(ICG1000系统管理)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -396,7 +388,7 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(ER5200系统管理)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -420,7 +412,7 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(ER3100系统管理)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -460,7 +452,7 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(ER6300G2系统管理)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -468,7 +460,7 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(ER3260系统管理)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -476,7 +468,7 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(HUAWEI SRG3250)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -500,7 +492,7 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(ER3108G系统管理)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -508,7 +500,7 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(SANGFOR FW)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -532,7 +524,7 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(ER5200G2系统管理)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -548,7 +540,7 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(ER6300系统管理)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -556,7 +548,7 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(HUAWEI ASG2100)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -564,7 +556,7 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(TP-Link 3600 DD-WRT)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -572,7 +564,7 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(NETGEAR WNDR3600)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -588,7 +580,7 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(ER2100系统管理)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -596,7 +588,7 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(NSFOCUS NF)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -612,7 +604,7 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(金和协同管理平台)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -634,9 +626,9 @@ Copy to `config.json`
     },
     "Fingerprint: 通达OA": {
         "loaded": true,
-        "regex": "(<link rel=\"shortcut icon\" href=\"/images/tongda.ico\" />)",
+        "regex": "(\\<link rel\\=\\\"shortcut icon\\\" href\\=\\\"/images/tongda.ico\\\" \\/\\>)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -652,7 +644,7 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(HUAWEI SRG1220)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -660,7 +652,7 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(ER2100n系统管理)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
@@ -668,7 +660,7 @@ Copy to `config.json`
         "loaded": true,
         "regex": "(ER8300G2系统管理)",
         "color": "gray",
-        "engine": "nfa",
+        "engine": "dfa",
         "scope": "response",
         "action": "any"
     },
