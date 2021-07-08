@@ -32,19 +32,19 @@ rules:
     loaded: true
     name: Email
     regex: (([a-zA-Z0-9][_|\.])*[a-zA-Z0-9]+@([a-zA-Z0-9][-|_|\.])*[a-zA-Z0-9]+\.((?!js|css|jpg|jpeg|png|ico)[a-zA-Z]{2,}))
-    scope: response
+    scope: response body
   - color: orange
     engine: nfa
     loaded: true
     name: Chinese IDCard
     regex: '[^0-9]((\d{8}(0\d|10|11|12)([0-2]\d|30|31)\d{3}$)|(\d{6}(18|19|20)\d{2}(0[1-9]|10|11|12)([0-2]\d|30|31)\d{3}(\d|X|x)))[^0-9]'
-    scope: response
+    scope: response body
   - color: orange
     engine: nfa
     loaded: true
     name: Chinese Mobile Number
     regex: '[^0-9A-Za-z](1(3([0-35-9]\d|4[1-8])|4[14-9]\d|5([\d]\d|7[1-79])|66\d|7[2-35-8]\d|8\d{2}|9[89]\d)\d{7})[^0-9A-Za-z]'
-    scope: response
+    scope: response body
   - color: cyan
     engine: nfa
     loaded: true
@@ -56,7 +56,13 @@ rules:
     loaded: true
     name: MAC Address
     regex: (^([a-fA-F0-9]{2}(:[a-fA-F0-9]{2}){5})|[^a-zA-Z0-9]([a-fA-F0-9]{2}(:[a-fA-F0-9]{2}){5}))
-    scope: any
+    scope: response
+  - color: orange
+    engine: nfa
+    loaded: false
+    name: Chinese Bank Card ID
+    regex: '[^0-9]([1-9]\d{12,18})[^0-9]'
+    scope: response
   type: Basic Information
 - rule:
   - color: cyan
@@ -77,7 +83,7 @@ rules:
     name: Debug Logic Parameters
     regex: ((access=)|(adm=)|(admin=)|(alter=)|(cfg=)|(clone=)|(config=)|(create=)|(dbg=)|(debug=)|(delete=)|(disable=)|(edit=)|(enable=)|(exec=)|(execute=)|(grant=)|(load=)|(make=)|(modify=)|(rename=)|(reset=)|(root=)|(shell=)|(test=)|(toggl=))
     scope: request
-  - color: red
+  - color: cyan
     engine: nfa
     loaded: true
     name: URL As A Value
