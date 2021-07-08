@@ -87,7 +87,7 @@ rules:
     engine: nfa
     loaded: true
     name: URL As A Value
-    regex: (=https?://.*)
+    regex: (=(https?://.*|https?%3(a|A)%2(f|F)%2(f|F).*))
     scope: request
   type: Maybe Vulnerability
 - rule:
