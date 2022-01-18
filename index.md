@@ -32,7 +32,7 @@ rules:
     loaded: true
     name: Email
     regex: (([a-zA-Z0-9][_|\.])*[a-zA-Z0-9]+@([a-zA-Z0-9][-|_|\.])*[a-zA-Z0-9]+\.((?!js|css|jpg|jpeg|png|ico)[a-zA-Z]{2,}))
-    scope: response body
+    scope: response
   - color: orange
     engine: nfa
     loaded: true
@@ -43,13 +43,13 @@ rules:
     engine: nfa
     loaded: true
     name: Chinese Mobile Number
-    regex: '[^0-9A-Za-z](1(3([0-35-9]\d|4[1-8])|4[14-9]\d|5([\d]\d|7[1-79])|66\d|7[2-35-8]\d|8\d{2}|9[89]\d)\d{7})[^0-9A-Za-z]'
+    regex: '[^\w]((?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-79])|(?:5[0-35-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[189]))\d{8})[^\w]'
     scope: response body
   - color: cyan
     engine: nfa
     loaded: true
     name: Internal IP Address
-    regex: '[^0-9]((127\.0\.0\.1)|(localhost)|(10\.\d{1,3}\.\d{1,3}\.\d{1,3})|(172\.((1[6-9])|(2\d)|(3[01]))\.\d{1,3}\.\d{1,3})|(192\.168\.\d{1,3}\.\d{1,3}))'
+    regex: '[^0-9]((127\.0\.0\.1)|(10\.\d{1,3}\.\d{1,3}\.\d{1,3})|(172\.((1[6-9])|(2\d)|(3[01]))\.\d{1,3}\.\d{1,3})|(192\.168\.\d{1,3}\.\d{1,3}))'
     scope: response
   - color: green
     engine: nfa
@@ -89,6 +89,12 @@ rules:
     name: URL As A Value
     regex: (=(https?://.*|https?%3(a|A)%2(f|F)%2(f|F).*))
     scope: request
+  - color: yellow
+    engine: dfa
+    loaded: true
+    name: Upload Form
+    regex: (type=\"file\")
+    scope: response body
   type: Maybe Vulnerability
 - rule:
   - color: green
@@ -121,6 +127,12 @@ rules:
     name: SSH Private Key
     regex: ([-]+BEGIN [^\s]+ PRIVATE KEY[-])
     scope: response
+  - color: green
+    engine: nfa
+    loaded: true
+    name: Windows File/Dir Path
+    regex: '[^\w](([a-zA-Z]:\\(?:\w+\\?)*)|([a-zA-Z]:\\(?:\w+\\)*\w+\.\w+))'
+    scope: response
   type: Sensitive Information
 - rule:
   - color: gray
@@ -129,6 +141,12 @@ rules:
     name: Linkfinder
     regex: (?:"|')(((?:[a-zA-Z]{1,10}://|//)[^"'/]{1,}\.[a-zA-Z]{2,}[^"']{0,})|((?:/|\.\./|\./)[^"'><,;|*()(%%$^/\\\[\]][^"'><,;|()]{1,})|([a-zA-Z0-9_\-/]{1,}/[a-zA-Z0-9_\-/]{1,}\.(?:[a-zA-Z]{1,4}|action)(?:[\?|#][^"|']{0,}|))|([a-zA-Z0-9_\-/]{1,}/[a-zA-Z0-9_\-/]{3,}(?:[\?|#][^"|']{0,}|))|([a-zA-Z0-9_\-]{1,}\.(?:php|asp|aspx|jsp|json|action|html|js|txt|xml)(?:[\?|#][^"|']{0,}|)))(?:"|')
     scope: any
+  - color: pink
+    engine: dfa
+    loaded: true
+    name: Source Map
+    regex: (.js.map)
+    scope: response body
   type: Other
 
 ```
