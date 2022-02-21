@@ -147,6 +147,12 @@ rules:
     name: Source Map
     regex: (.js.map)
     scope: response body
+  - color: magenta
+    engine: nfa
+    loaded: false
+    name: HTML Notes
+    regex: (<!--[\s\S]*?-->)
+    scope: any
   type: Other
 
 ```
