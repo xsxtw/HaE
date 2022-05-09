@@ -17,14 +17,20 @@ rules:
     engine: dfa
     loaded: true
     name: JSON Web Token
-    regex: (ey[A-Za-z0-9_-]{10,}\.[A-Za-z0-9._-]{10,}|ey[A-Za-z0-9_\/+-]{10,}\.[A-Za-z0-9._\/+-]{10,})
+    regex: (eyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9._-]{10,}|eyJ[A-Za-z0-9_\/+-]{10,}\.[A-Za-z0-9._\/+-]{10,})
     scope: any
   - color: green
     engine: dfa
     loaded: true
     name: Swagger UI
     regex: ((swagger-ui.html)|(\"swagger\":)|(Swagger UI)|(swaggerUi))
-    scope: response
+    scope: response body
+  - color: green
+    engine: dfa
+    loaded: true
+    name: Ueditor
+    regex: (ueditor\.(config|all)\.js)
+    scope: response body
   type: Fingerprint
 - rule:
   - color: yellow
@@ -75,7 +81,7 @@ rules:
     engine: dfa
     loaded: true
     name: Java Deserialization
-    regex: (javax.faces.ViewState)
+    regex: (javax\.faces\.ViewState)
     scope: response
   - color: cyan
     engine: dfa
@@ -133,19 +139,25 @@ rules:
     name: Windows File/Dir Path
     regex: '[^\w](([a-zA-Z]:\\(?:\w+\\?)*)|([a-zA-Z]:\\(?:\w+\\)*\w+\.\w+))'
     scope: response
+  - color: yellow
+    engine: nfa
+    loaded: true
+    name: Password Field
+    regex: ((|'|")(pass|pwd|passwd|password)(|'|"):( |)(|'|")(.*?)(|'|"),)
+    scope: response body
   type: Sensitive Information
 - rule:
   - color: gray
     engine: nfa
-    loaded: false
+    loaded: true
     name: Linkfinder
     regex: (?:"|')(((?:[a-zA-Z]{1,10}://|//)[^"'/]{1,}\.[a-zA-Z]{2,}[^"']{0,})|((?:/|\.\./|\./)[^"'><,;|*()(%%$^/\\\[\]][^"'><,;|()]{1,})|([a-zA-Z0-9_\-/]{1,}/[a-zA-Z0-9_\-/]{1,}\.(?:[a-zA-Z]{1,4}|action)(?:[\?|#][^"|']{0,}|))|([a-zA-Z0-9_\-/]{1,}/[a-zA-Z0-9_\-/]{3,}(?:[\?|#][^"|']{0,}|))|([a-zA-Z0-9_\-]{1,}\.(?:php|asp|aspx|jsp|json|action|html|js|txt|xml)(?:[\?|#][^"|']{0,}|)))(?:"|')
-    scope: any
+    scope: response body
   - color: pink
     engine: dfa
     loaded: true
     name: Source Map
-    regex: (.js.map)
+    regex: (\.js\.map)
     scope: response body
   - color: magenta
     engine: nfa
