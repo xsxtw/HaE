@@ -8,4 +8,4 @@
 
 ## Download Public Rules
 
-https://raw.githubusercontent.com/gh0stkey/HaE/gh-pages/Config.yml
+[gh0stkey/HaE/gh-pages/Config.yml](https://raw.githubusercontent.com/gh0stkey/HaE/gh-pages/Config.yml)
