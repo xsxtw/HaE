@@ -34,9 +34,9 @@ rules:
     engine: nfa
     loaded: true
     name: Email
-    regex: (([a-zA-Z0-9][_|\.])*[a-zA-Z0-9]+@([a-zA-Z0-9][-|_|\.])*[a-zA-Z0-9]+\.((?!js|css|jpg|jpeg|png|ico)[a-zA-Z]{2,}))
+    regex: (([a-z0-9][_|\.])*[a-z0-9]+@([a-z0-9][-|_|\.])*[a-z0-9]+\.((?!js|css|jpg|jpeg|png|ico)[a-z]{2,}))
     scope: response
-    sensitive: true
+    sensitive: false
   - color: orange
     engine: nfa
     loaded: true
@@ -125,7 +125,7 @@ rules:
     sensitive: false
   type: Maybe Vulnerability
 - rule:
-  - color: green
+  - color: yellow
     engine: dfa
     loaded: true
     name: OSS
@@ -137,28 +137,28 @@ rules:
     loaded: true
     name: Amazon AWS URL
     regex: (((([a-zA-Z0-9._-]+\.s3|s3)(\.|\-)+[a-zA-Z0-9._-]+|[a-zA-Z0-9._-]+\.s3|s3)\.amazonaws\.com)|(s3:\/\/[a-zA-Z0-9-\.\_]+)|(s3.console.aws.amazon.com\/s3\/buckets\/[a-zA-Z0-9-\.\_]+)|(amzn\.mws\.[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})|(ec2-[0-9-]+.cd-[a-z0-9-]+.compute.amazonaws.com)|(us[_-]?east[_-]?1[_-]?elb[_-]?amazonaws[_-]?com))
-    scope: any
+    scope: response body
     sensitive: true
   - color: green
     engine: nfa
     loaded: true
     name: Amazon AWS AccessKey ID
     regex: '[^0-9]((aws(.{0,20})?(?-i)[''\"][0-9a-zA-Z\/+]{40}[''\"])|((A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[a-zA-Z0-9]{16}))[^0-9]'
-    scope: any
+    scope: response body
     sensitive: true
   - color: green
     engine: nfa
     loaded: true
     name: Amazon AWS Region
     regex: ((us(-gov)?|ap|ca|cn|eu|sa)-(central|(north|south)?(east|west)?)-\d)
-    scope: any
+    scope: response body
     sensitive: true
-  - color: yellow
+  - color: blue
     engine: nfa
     loaded: true
     name: SSH Private Key
     regex: ([-]+BEGIN [^\s]+ PRIVATE KEY[-])
-    scope: response
+    scope: response body
     sensitive: true
   - color: green
     engine: nfa
@@ -171,14 +171,63 @@ rules:
     engine: nfa
     loaded: true
     name: Password Field
-    regex: ((|'|")([p](ass|wd|asswd|assword))(|'|"):( |)('|")(.*?)('|")(|,))
+    regex: ((|'|")([p](ass|wd|asswd|assword))(|'|")(:|=)( |)('|")(.*?)('|")(|,))
     scope: response body
     sensitive: false
   - color: green
     engine: nfa
     loaded: true
     name: Username Field
-    regex: ((|'|")([u](ser|name|ame|sername))(|'|"):( |)('|")(.*?)('|")(|,))
+    regex: ((|'|")([u](ser|name|ame|sername))(|'|")(:|=)( |)('|")(.*?)('|")(|,))
+    scope: response body
+    sensitive: false
+  - color: green
+    engine: dfa
+    loaded: true
+    name: WeCom Key
+    regex: ([c|C]or[p|P]id|[c|C]orp[s|S]ecret)
+    scope: response body
+    sensitive: true
+  - color: yellow
+    engine: nfa
+    loaded: true
+    name: JDBC Connection
+    regex: (jdbc:[a-z:]+://[a-z0-9\.\-_:;=/@?,&]+)
+    scope: any
+    sensitive: false
+  - color: yellow
+    engine: nfa
+    loaded: true
+    name: Authorization Header
+    regex: ((basic [a-z0-9=:_\+\/-]{5,100})|(bearer [a-z0-9_.=:_\+\/-]{5,100}))
+    scope: response body
+    sensitive: false
+  - color: green
+    engine: nfa
+    loaded: true
+    name: Github Access Token
+    regex: ([a-z0-9_-]*:[a-z0-9_\-]+@github\.com*)
+    scope: response body
+    sensitive: false
+  - color: cyan
+    engine: nfa
+    loaded: true
+    name: Microsoft Teams Webhook
+    regex: (https://outlook\.office\.com/webhook/[a-z0-9@-]+/IncomingWebhook/[a-z0-9-]+/[a-z0-9-]+)
+    scope: response body
+    sensitive: false
+  - color: cyan
+    engine: nfa
+    loaded: true
+    name: Zoho Webhook
+    regex: (https://creator\.zoho\.com/api/[a-z0-9/_.-]+\?authtoken=[a-z0-9]+)
+    scope: response body
+    sensitive: false
+  - color: cyan
+    engine: nfa
+    loaded: true
+    name: Sonarqube Token
+    regex: (sonar.{0,50}(?:"|\'|`)?[0-9a-f]{40}(?:"|\'|`)?)
     scope: response body
     sensitive: false
   type: Sensitive Information
