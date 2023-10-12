@@ -29,13 +29,50 @@ rules:
     scope: response body
     engine: dfa
     sensitive: true
-  - name: F5-BIGIP
+- group: Maybe Vulnerability
+  rule:
+  - name: RCE Paramters
     loaded: true
-    regex: (BIG-IP|F5_ST|F5_HT|F5_fullWT|BigIP|BIGipServerpool|F5LTM|BIGipServer|BIGip)
+    regex: ((cmd=)|(exec=)|(command=)|(execute=)|(ping=)|(query=)|(jump=)|(code=)|(reg=)|(do=)|(func=)|(arg=)|(option=)|(load=)|(process=)|(step=)|(read=)|(function=)|(feature=)|(exe=)|(module=)|(payload=)|(run=)|(daemon=)|(upload=)|(dir=)|(download=)|(log=)|(ip=)|(cli=))
     color: cyan
+    scope: request
+    engine: dfa
+    sensitive: true
+  - name: Java Deserialization
+    loaded: true
+    regex: (javax\.faces\.ViewState)
+    color: yellow
     scope: response body
     engine: dfa
     sensitive: true
+  - name: Debug Logic Parameters
+    loaded: true
+    regex: ((access=)|(adm=)|(admin=)|(alter=)|(cfg=)|(clone=)|(config=)|(create=)|(dbg=)|(debug=)|(delete=)|(disable=)|(edit=)|(enable=)|(exec=)|(execute=)|(grant=)|(load=)|(make=)|(modify=)|(rename=)|(reset=)|(root=)|(shell=)|(test=)|(toggl=))
+    color: cyan
+    scope: request
+    engine: dfa
+    sensitive: true
+  - name: URL As A Value
+    loaded: true
+    regex: (=(https?)(://|%3a%2f%2f))
+    color: cyan
+    scope: any
+    engine: nfa
+    sensitive: false
+  - name: Upload Form
+    loaded: true
+    regex: (type=\"file\")
+    color: yellow
+    scope: response body
+    engine: dfa
+    sensitive: true
+  - name: DoS Paramters
+    loaded: true
+    regex: ((size=)|(page=)|(num=)|(limit=)|(start=)|(end=)|(count=))
+    color: cyan
+    scope: request
+    engine: nfa
+    sensitive: false
 - group: Basic Information
   rule:
   - name: Email
@@ -80,73 +117,15 @@ rules:
     scope: response
     engine: nfa
     sensitive: true
-- group: Maybe Vulnerability
-  rule:
-  - name: RCE Paramters
-    loaded: true
-    regex: ((cmd=)|(exec=)|(command=)|(execute=)|(ping=)|(query=)|(jump=)|(code=)|(reg=)|(do=)|(func=)|(arg=)|(option=)|(load=)|(process=)|(step=)|(read=)|(function=)|(feature=)|(exe=)|(module=)|(payload=)|(run=)|(daemon=)|(upload=)|(dir=)|(download=)|(log=)|(ip=)|(cli=))
-    color: cyan
-    scope: request
-    engine: dfa
-    sensitive: true
-  - name: Java Deserialization
-    loaded: true
-    regex: (javax\.faces\.ViewState)
-    color: yellow
-    scope: response body
-    engine: dfa
-    sensitive: true
-  - name: Debug Logic Parameters
-    loaded: true
-    regex: ((access=)|(adm=)|(admin=)|(alter=)|(cfg=)|(clone=)|(config=)|(create=)|(dbg=)|(debug=)|(delete=)|(disable=)|(edit=)|(enable=)|(exec=)|(execute=)|(grant=)|(load=)|(make=)|(modify=)|(rename=)|(reset=)|(root=)|(shell=)|(test=)|(toggl=))
-    color: cyan
-    scope: request
-    engine: dfa
-    sensitive: true
-  - name: URL As A Value
-    loaded: true
-    regex: (=(https?://.*|https?%3(a|A)%2(f|F)%2(f|F).*))
-    color: cyan
-    scope: any
-    engine: nfa
-    sensitive: true
-  - name: Upload Form
-    loaded: true
-    regex: (type=\"file\")
-    color: yellow
-    scope: response body
-    engine: dfa
-    sensitive: true
-  - name: DoS Paramters
-    loaded: true
-    regex: ((size=)|(page=)|(num=)|(limit=)|(start=)|(end=)|(count=))
-    color: cyan
-    scope: request
-    engine: nfa
-    sensitive: false
-  - name: JSONP Response
-    loaded: true
-    regex: (^(\w.*?)\()
-    color: yellow
-    scope: response body
-    engine: nfa
-    sensitive: false
 - group: Sensitive Information
   rule:
-  - name: OSS
+  - name: Cloud Key
     loaded: true
-    regex: (([A|a]ccess[K|k]ey[I|i][d|D])|([A|a]ccess[K|k]ey[S|s]ecret)|(LTAI))
+    regex: ((accesskeyid)|(accesskeysecret)|(LTAI[a-z0-9]{12,20}))
     color: yellow
     scope: any
-    engine: dfa
-    sensitive: true
-  - name: SSH Private Key
-    loaded: true
-    regex: ([-]+BEGIN [^\s]+ PRIVATE KEY[-])
-    color: blue
-    scope: response body
     engine: nfa
-    sensitive: true
+    sensitive: false
   - name: Windows File/Dir Path
     loaded: true
     regex: '[^\w](([a-zA-Z]:\\(?:\w+\\?)*)|([a-zA-Z]:\\(?:\w+\\)*\w+\.\w+))'
@@ -163,7 +142,7 @@ rules:
     sensitive: false
   - name: Username Field
     loaded: true
-    regex: ((|'|")([u](ser|name|ame|sername))(|'|")(:|=)( |)('|")(.*?)('|")(|,))
+    regex: ((|'|")(([u](ser|name|ame|sername))|(account))(|'|")(:|=)( |)('|")(.*?)('|")(|,))
     color: green
     scope: response body
     engine: nfa
@@ -196,30 +175,9 @@ rules:
     scope: response body
     engine: nfa
     sensitive: false
-  - name: Microsoft Teams Webhook
-    loaded: true
-    regex: (https://outlook\.office\.com/webhook/[a-z0-9@-]+/IncomingWebhook/[a-z0-9-]+/[a-z0-9-]+)
-    color: cyan
-    scope: response body
-    engine: nfa
-    sensitive: false
-  - name: Zoho Webhook
-    loaded: true
-    regex: (https://creator\.zoho\.com/api/[a-z0-9/_.-]+\?authtoken=[a-z0-9]+)
-    color: cyan
-    scope: response body
-    engine: nfa
-    sensitive: false
-  - name: Sonarqube Token
-    loaded: true
-    regex: (sonar.{0,50}(?:"|\'|`)?[0-9a-f]{40}(?:"|\'|`)?)
-    color: cyan
-    scope: response body
-    engine: nfa
-    sensitive: false
   - name: Sensitive Field
     loaded: true
-    regex: ((|'|")([\w]{0,10})((key)|(secret)|(token)|(config)|(auth))(|'|")(:|=)(
+    regex: ((|'|")([\w]{0,10})((key)|(secret)|(token)|(config)|(auth)|(access)|(admin))(|'|")(:|=)(
       |)('|")(.*?)('|")(|,))
     color: yellow
     scope: response
