@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>HaE - Conversion Rule</title>
+  <style>
+    body {
+      background: #272822;
+      color: #F8F8F2;
+      font-family: "Courier New", Courier, monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      flex-direction: column;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-evenly;
+      width: 100%;
+    }
+
+    .box {
+      flex-basis: 45%;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    textarea {
+      background: #3C3D32;
+      color: #F8F8F2;
+      border: none;
+      width: 100%;
+      height: 530px;
+      padding: 10px;
+      font-size: 18px;
+    }
+
+    button {
+      background: none;
+      border: 1px solid #F8F8F2;
+      padding: 10px 20px;
+      color: #F8F8F2;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin: 20px auto;
+      display: block;
+    }
+
+    button:hover {
+      background: #F8F8F2;
+      color: #272822;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/3.8.3/js-yaml.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="box">
+      <h2>Input YAML</h2>
+      <textarea id="input"></textarea>
+    </div>
+    <div class="box">
+      <h2>Output YAML</h2>
+      <textarea id="output" readonly></textarea>
+    </div>
+  </div>
+  <button onclick="convert()">Convert</button>
+
+  <script>
+    function convert() {
+      let text = document.getElementById('input').value;
+
+      let data = jsyaml.safeLoad(text);
+
+      data.rules.forEach((group) => {
+        group.rule.forEach((rule) => {
+          let name = rule.name;
+          let loaded = rule.loaded;
+          let color = rule.color;
+          let scope = rule.scope;
+          let engine = rule.engine;
+          let sensitive = rule.sensitive;
+          delete rule.name;
+          delete rule.loaded;
+          delete rule.color;
+          delete rule.scope;
+          delete rule.engine;
+          delete rule.sensitive;
+          rule.name = name;
+          rule.loaded = loaded;
+          rule.f_regex = rule.regex;
+          rule.s_regex = '';
+          rule.format = '{0}';
+          rule.color = color;
+          rule.scope = scope;
+          rule.engine = engine;
+          rule.sensitive = sensitive;
+          delete rule.regex;
+
+        });
+      });
+
+      // Convert the JS object back to YAML
+      let output = jsyaml.safeDump(data);
+
+      // Display the output YAML
+      document.getElementById('output').value = output;
+    } 
+  </script>
+
+</body>
+
+</html>
