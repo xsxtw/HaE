@@ -27,7 +27,7 @@ rules:
     color: red
     scope: response body
     engine: dfa
-    sensitive: true
+    sensitive: false
   - name: Ueditor
     loaded: true
     f_regex: (ueditor\.(config|all)\.js)
@@ -36,7 +36,7 @@ rules:
     color: green
     scope: response body
     engine: dfa
-    sensitive: true
+    sensitive: false
   - name: Druid
     loaded: true
     f_regex: (Druid Stat Index)
@@ -45,7 +45,7 @@ rules:
     color: orange
     scope: response body
     engine: dfa
-    sensitive: true
+    sensitive: false
 - group: Maybe Vulnerability
   rule:
   - name: Java Deserialization
@@ -97,7 +97,7 @@ rules:
   rule:
   - name: Email
     loaded: true
-    f_regex: (([a-z0-9][_|\.])*[a-z0-9]+@([a-z0-9][-|_|\.])*[a-z0-9]+\.((?!js|css|jpg|jpeg|png|ico)[a-z]{2,}))
+    f_regex: (([a-z0-9]+[_|\.])*[a-z0-9]+@([a-z0-9]+[-|_|\.])*[a-z0-9]+\.((?!js|css|jpg|jpeg|png|ico)[a-z]{2,5}))
     s_regex: ''
     format: '{0}'
     color: yellow
