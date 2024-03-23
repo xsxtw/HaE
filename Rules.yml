@@ -17,7 +17,7 @@ rules:
     format: '{0}'
     color: green
     scope: any
-    engine: dfa
+    engine: nfa
     sensitive: true
   - name: Swagger UI
     loaded: true
@@ -77,7 +77,7 @@ rules:
     sensitive: false
   - name: Upload Form
     loaded: true
-    f_regex: (type=\"file\")
+    f_regex: (type\=\"file\")
     s_regex: ''
     format: '{0}'
     color: yellow
@@ -172,7 +172,7 @@ rules:
     sensitive: false
   - name: Username Field
     loaded: true
-    f_regex: ((|'|")(|[\w]{1,10})(([u](ser|name|sername))|(account)|((creat|updat)(|ed|or|er)(|by|on|at)))(|[\w]{1,10})(|'|")(:|=)(
+    f_regex: ((|'|")(|[\w]{1,10})(([u](ser|name|sername))|(account)|((((create|update)((d|r)|(by|on|at)))|(creator))))(|[\w]{1,10})(|'|")(:|=)(
       |)('|")(.*?)('|")(|,))
     s_regex: ''
     format: '{0}'
@@ -272,13 +272,4 @@ rules:
     color: magenta
     scope: response body
     engine: dfa
-    sensitive: false
-  - name: Vue Route
-    loaded: true
-    f_regex: path:"(.*?)"
-    s_regex: ''
-    format: '{0}'
-    color: gray
-    scope: response body
-    engine: nfa
     sensitive: false
